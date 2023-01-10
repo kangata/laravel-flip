@@ -1,0 +1,28 @@
+{
+    "name": "quetzal-studio/laravel-flip",
+    "description": "Flip package for Laravel",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ata",
+            "email": "quetzalskeith@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "QuetzalStudio\\Flip\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "QuetzalStudio\\Flip\\FlipServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
