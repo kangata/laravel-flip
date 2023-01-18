@@ -5,7 +5,9 @@ return [
 
     'client_key' => env('FLIP_CLIENT_KEY'),
 
-    'production_base_url' => env('FLIP_PRODUCTION_BASE_URL', 'https://bigflip.id/big_sandbox_api'),
+    'validation_token' => env('FLIP_VALIDATION_TOKEN'),
+
+    'production_base_url' => env('FLIP_PRODUCTION_BASE_URL', 'https://bigflip.id/api'),
 
     'sandbox_base_url' => env('FLIP_SANDBOX_BASE_URL', 'https://bigflip.id/big_sandbox_api'),
 
