@@ -15,7 +15,12 @@ class Client
 
     public function __construct(array $options = [])
     {
-        $this->config = new Config();
+        $this->config = new Config(collect($options)->only([
+            'environment',
+            'client_key',
+            'production_base_url',
+            'sandbox_base_url',
+        ])->toArray());
 
         $this->throwError = data_get($options, 'throw', true);
     }
@@ -30,6 +35,12 @@ class Client
         return $this->config;
     }
 
+    /**
+     * Set idempotency key
+     *
+     * @param string $key
+     * @return self
+     */
     public function idempotencyKey(string $key)
     {
         return $this->withHeaders([
@@ -63,15 +74,17 @@ class Client
         }
 
         if (in_array($method, ['get', 'post'])) {
-            $http = $this->pendingRequest->$method(...$arguments);
+            $response = $this->pendingRequest->$method(...$arguments);
+
+            RequestLogger::dispatch($response);
 
             $this->pendingRequest = null;
 
             if ($this->throwError) {
-                $http = $http->throw();
+                $response = $response->throw();
             }
 
-            return $http;
+            return $response;
         }
 
         $this->pendingRequest->$method(...$arguments);

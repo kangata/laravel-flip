@@ -17,21 +17,9 @@ class Flip
 
     public static bool $throw = true;
 
-    public static function client()
-    {
-        if (! static::$client) {
-            static::$client = new Client([
-                'throw' => static::$throw,
-            ]);
-        }
+    public static ?string $logChannel = null;
 
-        return static::$client;
-    }
-
-    public static function url(string $endpoint)
-    {
-        return static::$client->config()->url($endpoint);
-    }
+    public static array $configOptions = [];
 
     public static function useHttpResponse()
     {
@@ -41,6 +29,34 @@ class Flip
     public static function disableThrow()
     {
         static::$throw = false;
+    }
+
+    public static function useLogger(string $channel)
+    {
+        static::$logChannel = $channel;
+    }
+
+    public static function config(array $options)
+    {
+        static::$configOptions = $options;
+    }
+
+    public static function client()
+    {
+        $options = array_merge(static::$configOptions, [
+            'throw' => static::$throw,
+        ]);
+
+        if (! static::$client) {
+            static::$client = new Client($options);
+        }
+
+        return static::$client;
+    }
+
+    public static function url(string $endpoint)
+    {
+        return static::$client->config()->url($endpoint);
     }
 
     public static function handleResponse(Response $response, string $key = null)
