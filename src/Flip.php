@@ -47,11 +47,7 @@ class Flip
             'throw' => static::$throw,
         ]);
 
-        if (! static::$client) {
-            static::$client = new Client($options);
-        }
-
-        return static::$client;
+        return static::$client = new Client($options);
     }
 
     public static function url(string $endpoint)
