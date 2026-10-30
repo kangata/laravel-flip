@@ -26,9 +26,9 @@ class Config
      */
     public function useDefaultConfig()
     {
-        $this->environment = config('flip.environment');
-        $this->clientKey = config('flip.client_key');
-        $this->baseUrl = config("flip.{$this->environment}_base_url");
+        $this->environment = (string) config('flip.environment');
+        $this->clientKey = (string) config('flip.client_key');
+        $this->baseUrl = (string) config("flip.{$this->environment}_base_url");
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace QuetzalStudio\Flip;
 
-use Exception;
+use Throwable;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Http\Client\Response;
 use Illuminate\Log\Logger;
@@ -98,7 +98,7 @@ class RequestLogger
                 'request' => $this->requestContext($request),
                 'response' => $this->responseContext(),
             ]);
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             Log::error($e);
         }
     }

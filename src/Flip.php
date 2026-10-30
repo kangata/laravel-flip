@@ -55,7 +55,7 @@ class Flip
         return static::$client->config()->url($endpoint);
     }
 
-    public static function handleResponse(Response $response, string $key = null)
+    public static function handleResponse(Response $response, ?string $key = null)
     {
         return static::$httpResponse ? $response : $response->json($key);
     }
